@@ -1,8 +1,16 @@
-#from tkinter import Tk, Listbox, Scrollbar, RIGHT
 from tkinter import *
+import tkinter.filedialog
+from algorithms.data import load_from_xls
 
-textMain ='This is our Message'
-listbox = 1
+textMain ='To calculate the coefficient of inbreeding, select one person on the list. \nTo calculate the coefficient of relationship, select two person on the list.'
+subjects = []
+
+def openFile(window, listbox):
+    filename = tkinter.filedialog.askopenfilename(title = "Select file",filetypes =(("xlsx files", "*.xlsx"), ("xls files","*.xls"), ("all files","*.*")))
+    load_from_xls(subjects, filename)
+    for i in subjects:
+        listbox.insert(END, i.name) 
+
 
 def create_window():
     window = Tk()
@@ -12,24 +20,22 @@ def create_window():
     scrollbar = Scrollbar(window) 
     scrollbar.pack( side = LEFT, fill = Y ) 
     listbox = Listbox(window, yscrollcommand = scrollbar.set, width=30) 
-    for line in range(100): 
-        listbox.insert(END, 'This is line number' + str(line)) 
+
     listbox.pack( side = LEFT, fill = BOTH ) 
     scrollbar.config( command = listbox.yview )
 
     mainText = Message(window, text = textMain, anchor = W, width=250) 
     mainText.pack()
 
-    button = Button(window, text='Coefficent of inbreeding', width=20) #command=...
-    button2 = Button(window, text='Coeffficent of relationship', width=20) #command=...
+    button = Button(window, text='Coefficent of inbreeding', width=20)
+    button2 = Button(window, text='Coeffficent of relationship', width=20)
+    button3 = Button(window, text='Load file', width=20 , command = lambda: openFile(window, listbox))
+
     button.pack() 
     button2.pack() 
-
-    label = Label(window, text='Klaudia Faltyn kopirajts', anchor = S ) 
+    button3.pack()
+    label = Label(window, text='Klaudia Faltyn', anchor = S ) 
     label.pack() 
 
     window.mainloop()
 
-
-#def populateList():
-    
