@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 xlrd = "*"
+numpy = "*"
+networkx = "*"
+matplotlib = "*"
+scipy = "*"
 
 [dev-packages]
 

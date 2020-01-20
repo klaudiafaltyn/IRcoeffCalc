@@ -10,7 +10,9 @@ class Person(object):
         self.child1 = child1
         self.child2 = child2
         self.child3 = child3
-    
+
+
+
 
 def load_from_xls(people, src):
     wb = open_workbook(src)
@@ -23,12 +25,9 @@ def load_from_xls(people, src):
             values = []
             for col in range(number_of_columns):
                 value  = (sheet.cell(row,col).value)
-                try:
-                    value = str(int(value))
-                except ValueError:
-                    pass
-                finally:
-                    values.append(value)
+                if len(str(value)) < 2:
+                    values.append(None)
+                else:
+                    values.append(str(value))
             person = Person(*values)
             people.append(person)
-

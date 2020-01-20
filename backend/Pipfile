@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 tkintert = "*"
+numpy = "*"
+matplotlib = "*"
 
 [dev-packages]
 
