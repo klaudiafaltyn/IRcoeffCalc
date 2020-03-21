@@ -13,7 +13,7 @@ def open_file(window, listbox):
 
 
 def open_default_file(window, listbox):
-    filename = "/home/michael/git_workspace/coefficient-of-inbreeding-thesis/backend/src/algorithms/test.xlsx"
+    filename = "/home/klaudia/git_workspace/coefficient-of-inbreeding-thesis/backend/src/algorithms/test.xlsx"
     load_from_xls(subjects, filename)
     for i in subjects:
         listbox.insert(END, i.name) 
@@ -45,7 +45,7 @@ def create_window():
     label.pack() 
 
     open_default_file(window, listbox)
-    window.mainloop()
+    #window.mainloop()
 
 def send_data():
     return subjects
