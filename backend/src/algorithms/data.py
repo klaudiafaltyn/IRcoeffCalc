@@ -1,16 +1,15 @@
 from xlrd import open_workbook
 
 class Person(object):
-    def __init__(self, name, born_year, death_year, mother, father, child1, child2, child3):
+    def __init__(self, name, born_year, death_year, mother, father, children):
         self.name = name
         self.born_year = born_year
         self.death_year = death_year
         self.mother = mother
         self.father = father
-        self.child1 = child1
-        self.child2 = child2
-        self.child3 = child3
-
+        self.children=[]
+        if children is not None:
+            self.children = [i.strip() for i in children.split(",")]
 
 
 
