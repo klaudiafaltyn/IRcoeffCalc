@@ -45,13 +45,17 @@ def inbreed_calculate(child):
     parent1_ancestors = list(nx.descendants(graph, source=parents[0]))
     parent2_ancestors = list(nx.descendants(graph, source=parents[1]))
     common_ancestors = [val for val in parent1_ancestors if val in parent2_ancestors]     
-    
+
     nodes.extend(common_ancestors)
 
     inbreeding_coefficient = 0
     for ancestor in list(common_ancestors):
         paths_to_ancestor_par1 = list(nx.all_simple_paths(graph, source=parents[0], target=ancestor))
         paths_to_ancestor_par2 = list(nx.all_simple_paths(graph, source=parents[1], target=ancestor))
+        print(paths_to_ancestor_par1)
+        print(paths_to_ancestor_par2)
+
+
         for paths1 in paths_to_ancestor_par1:
             for paths2 in paths_to_ancestor_par2:
                 if len([node for node in paths1 if node in paths2]) == 1:  
