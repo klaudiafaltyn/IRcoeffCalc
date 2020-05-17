@@ -1,6 +1,7 @@
 import networkx as nx 
 import matplotlib.pyplot as plt
 from math import sqrt
+from networkx.drawing.nx_agraph import graphviz_layout
 
 population = []
 graph_wrapper = []
@@ -33,14 +34,6 @@ def inbreed_calculate(child):
     edges.extend( [(child, parents[1]), (child, parents[2]) ] )
     nodes.extend(parents)
 
-
-
-    # Diffrent, possible better approach XD    
-    # nx.draw(graph_wrapper[0],edgelist=edges, nodelist=nodes, pos=pos, node_color="yellow")
-    # nx.draw_networkx_labels(graph_wrapper[0], pos=pos)
-    # plt.show()
-
-
     parents.remove(child)
     parent1_ancestors = list(nx.descendants(graph, source=parents[0]))
     parent2_ancestors = list(nx.descendants(graph, source=parents[1]))
@@ -52,21 +45,11 @@ def inbreed_calculate(child):
     for ancestor in list(common_ancestors):
         paths_to_ancestor_par1 = list(nx.all_simple_paths(graph, source=parents[0], target=ancestor))
         paths_to_ancestor_par2 = list(nx.all_simple_paths(graph, source=parents[1], target=ancestor))
-        print(paths_to_ancestor_par1)
-        print(paths_to_ancestor_par2)
-
 
         for paths1 in paths_to_ancestor_par1:
             for paths2 in paths_to_ancestor_par2:
                 if len([node for node in paths1 if node in paths2]) == 1:  
                     inbreeding_coefficient += (0.5)**(len(paths1)+len(paths2)- 2 + 1)*(1+inbreed_calculate(ancestor))
-    
-
-
-    # pos=nx.kamada_kawai_layout(graph)
-    # nx.draw_networkx_nodes(graph, pos=pos, nodelist=nodes, node_color='b') #or even nx.draw(h,pos=pos,node_color='b') to get nodes and edges in one command
-    # nx.draw_networkx_edges(graph, pos=pos, edgelist=edges)
-    # plt.show()
     return inbreeding_coefficient
 
 
@@ -74,8 +57,6 @@ def relation_calculate(child1, child2):
     graph = graph_wrapper[0]
 
     parents = [child1, child2]
-    
-
 
     parent1_ancestors = list(nx.descendants(graph, source=parents[0]))
     parent2_ancestors = list(nx.descendants(graph, source=parents[1]))
@@ -93,10 +74,6 @@ def relation_calculate(child1, child2):
     denominator = sqrt( (1.0 + inbreed_calculate(child1))* (1.0 + inbreed_calculate(child2)) )
     return numerator/denominator
 
-#    numerator  -   licznik
-#   -----------    --------- !!!!!!!!!!!!!!!!!
-#   denominator -  mianownik
-
 
 def generate_data(data):
     if len(population) != 0:
@@ -106,20 +83,14 @@ def generate_data(data):
     if len(graph_wrapper) != 0:
         graph_wrapper[:] = []
     graph_wrapper.append(populate_graph())
+    draw_graph()
 
 
 def draw_graph():
-    if len(graph_wrapper) == 15:
-        pos = nx.spring_layout(graph_wrapper[0], iterations=10)
-        nx.draw(graph_wrapper[0], pos, node_size=0, alpha=0.4, edge_color='r', font_size=16, with_labels=True)
+    if len(graph_wrapper) == 1:
+        reversed_graph = nx.reverse(graph_wrapper[0], copy=True)
+        pos=graphviz_layout(reversed_graph, prog='dot')
+        nx.draw(reversed_graph, pos, with_labels=True, arrows=True, node_color="steelblue", alpha=0.6, node_size=100)
         plt.show()
-        
-        # pos=nx.kamada_kawai_layout(graph_wrapper[0])
-        # nx.draw(graph_wrapper[0], pos=pos, node_color="yellow")
-        # nx.draw_networkx_labels(graph_wrapper[0], pos=pos)
-        # plt.show()
-        
-        # pos = hierarchy_pos(graph_wrapper[0],1)    
-        # nx.draw(graph_wrapper[0], pos=pos, with_labels=True)
-        # plt.show()
-        # plt.savefig('hierarchy.png')
+
+

@@ -9,6 +9,7 @@ numpy = "*"
 networkx = "*"
 matplotlib = "*"
 scipy = "*"
+pygraphviz = "*"
 
 [dev-packages]
 
