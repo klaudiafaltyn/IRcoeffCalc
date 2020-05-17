@@ -1,8 +1,8 @@
-backend/src/algorithms/__pycache__/__init__.cpython-38.pyc
-backend/src/gui/__pycache__/interface.cpython-38.pyc
-backend/src/gui/__pycache__/__init__.cpython-38.pyc
-backend/src/algorithms/__pycache__/data.cpython-38.pyc
-backend/src/main.build
-backend/src/main.dist
+src/algorithms/__pycache__/__init__.cpython-38.pyc
+src/gui/__pycache__/interface.cpython-38.pyc
+src/gui/__pycache__/__init__.cpython-38.pyc
+src/algorithms/__pycache__/data.cpython-38.pyc
+src/main.build
+src/main.dist
 .vscode
 .vscode/settings.json

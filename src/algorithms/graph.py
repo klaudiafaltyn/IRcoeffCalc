@@ -12,20 +12,22 @@ def populate_graph():
     for person in population:
         if person.father is not None and not graph.has_edge(person.name, person.father):
             graph.add_edge(person.name, person.father)
+            print(person.name, person.father, ": name, father\n")
         if person.mother is not None and not graph.has_edge(person.name, person.mother):
             graph.add_edge(person.name, person.mother)
+            print(person.name, person.mother, ": name, mother\n")
         for child in person.children:
-            graph.add_edge(child, person.name)
+            if not graph.has_edge(child, person.name) and not graph.has_edge(person.name, child):
+                graph.add_edge(child, person.name)
+                print(child, person.name, "child, name\n")
     return graph
 
 def inbreed_calculate(child):
     graph = graph_wrapper[0]   
     
-    # Storing only relevant parts of graph 
     edges = []
     nodes = []
 
-    # Retriving parents nodes
     parents = list(nx.dfs_tree(graph, source=child, depth_limit=1))
     
     if len(parents) != 3:
@@ -83,7 +85,6 @@ def generate_data(data):
     if len(graph_wrapper) != 0:
         graph_wrapper[:] = []
     graph_wrapper.append(populate_graph())
-    draw_graph()
 
 
 def draw_graph():

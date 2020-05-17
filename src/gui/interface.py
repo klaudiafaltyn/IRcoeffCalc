@@ -21,15 +21,6 @@ def open_file(window, listbox):
     for i in subjects:
         listbox.insert(END, i.name)
     generate_data(subjects)
-    draw_graph()
-
-
-def open_default_file(window, listbox):
-    filename = "/home/michael/licencjat/coefficient-of-inbreeding-thesis/backend/src/algorithms/test.xlsx"
-    load_from_xls(subjects, filename)
-    for i in subjects:
-        listbox.insert(END, i.name)
-    generate_data(subjects)
 
 
 def setText(txt_field, function):
@@ -99,13 +90,17 @@ def create_window():
         window, text="Load file", width=20, command=lambda: open_file(window, listbox)
     )
 
+    button4 = Button(
+        window, text="Draw graph", width=20, command=lambda: draw_graph()
+    )
+
     button.pack()
     button2.pack()
+    button4.pack()
     button3.pack()
     resultRel.pack()
     resultInbred.pack()
     label = Label(window, text="Klaudia Faltyn, 2020", anchor=W)
     label.pack(side=BOTTOM, fill=X)
 
-    # open_default_file(window, listbox)
     window.mainloop()
