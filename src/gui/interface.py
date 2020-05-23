@@ -3,7 +3,7 @@ import tkinter.filedialog
 from algorithms.data import load_from_xls
 from algorithms.graph import inbreed_calculate, relation_calculate, generate_data, draw_graph
 
-textMain = "\n• First, load the pedigree file in .xlsx or .xls format.\n• To calculate the coefficient of inbreeding, select one person on the list.\n• To calculate the coefficient of relationship, select two person on the list.\n• Finally click the appropriate button.\n\n"
+textMain = "\n• First, load the pedigree file in .xlsx or .xls format.\n• To calculate the coefficient of inbreeding, select one person on the list.\n• To calculate the coefficient of relationship, select two person on the list.\n• Finally click the appropriate button.\n• After choosing data, it is possible to draw a family tree.\n\n"
 subjects = []
 
 def open_file(window, listbox):
@@ -57,9 +57,14 @@ def show_relation(txt_field, idx):
 
 def create_window():
     window = Tk()
-    window.title("Inbreed Calc 0.1")
-    window.geometry("700x600")
+    window.title("IRcoeff Calc")
+    window.geometry("700x650")
 
+    canvas = Canvas(window, width=500, height=80)
+    canvas.pack()
+    img = PhotoImage(file="gui/logo.png")
+    canvas.create_image(20,20, anchor=NW, image=img)
+    
     scrollbar = Scrollbar(window)
     scrollbar.pack(side=LEFT, fill=Y)
     listbox = Listbox(
@@ -76,13 +81,13 @@ def create_window():
     resultRel = Message(window, text="", anchor=W, width=400)
     button = Button(
         window,
-        text="Coefficent of inbreeding",
+        text="Coefficient of inbreeding",
         width=20,
         command=lambda: show_inbreed(resultInbred, listbox.curselection()),
     )
     button2 = Button(
         window,
-        text="Coeffficent of relationship",
+        text="Coefficient of relationship",
         width=20,
         command=lambda: show_relation(resultRel, listbox.curselection()),
     )
@@ -91,16 +96,16 @@ def create_window():
     )
 
     button4 = Button(
-        window, text="Draw graph", width=20, command=lambda: draw_graph()
+        window, text="Draw a family tree", width=20, command=lambda: draw_graph()
     )
 
     button.pack()
     button2.pack()
     button4.pack()
     button3.pack()
-    resultRel.pack()
     resultInbred.pack()
-    label = Label(window, text="Klaudia Faltyn, 2020", anchor=W)
+    resultRel.pack()
+    label = Label(window, text="Klaudia Faltyn, 2020", anchor=S)
     label.pack(side=BOTTOM, fill=X)
 
     window.mainloop()
