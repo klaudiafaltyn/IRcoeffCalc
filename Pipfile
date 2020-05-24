@@ -10,6 +10,7 @@ networkx = "*"
 matplotlib = "*"
 scipy = "*"
 pygraphviz = "*"
+pyinstaller = "*"
 
 [dev-packages]
 

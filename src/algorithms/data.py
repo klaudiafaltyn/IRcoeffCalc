@@ -1,16 +1,15 @@
 from xlrd import open_workbook
 
 class Person(object):
-    def __init__(self, name, born_year, death_year, mother, father, children):
-        self.name = name
-        self.born_year = born_year
-        self.death_year = death_year
-        self.mother = mother
-        self.father = father
-        self.children=[]
-        if children is not None:
-            self.children = [i.strip() for i in children.split(",")]
+    def __init__(self, name, born_year, death_year, mother, father):
+        self.name = name.strip() if name is not None else None
+        self.born_year = int(float(born_year)) if born_year is not None else None
+        self.death_year = int(float(death_year)) if death_year is not None else None
+        self.mother = mother.strip() if mother is not None else None
+        self.father = father.strip() if father is not None else None
 
+    def __repr__(self):
+        return ("%s\n%s-%s" % (self.name, self.born_year, self.death_year))
 
 
 def load_from_xls(people, src):

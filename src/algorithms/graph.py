@@ -6,20 +6,19 @@ from networkx.drawing.nx_agraph import graphviz_layout
 population = []
 graph_wrapper = []
 
+def find_name(arr , name):
+    for person in arr:
+        if person.name == name:
+            return person
+
 def populate_graph():
-    graph = nx.MultiDiGraph()
-    graph.add_nodes_from([person.name for person in population])
+    graph = nx.DiGraph()
+    graph.add_nodes_from(population)
     for person in population:
-        if person.father is not None and not graph.has_edge(person.name, person.father):
-            graph.add_edge(person.name, person.father)
-            print(person.name, person.father, ": name, father\n")
-        if person.mother is not None and not graph.has_edge(person.name, person.mother):
-            graph.add_edge(person.name, person.mother)
-            print(person.name, person.mother, ": name, mother\n")
-        for child in person.children:
-            if not graph.has_edge(child, person.name) and not graph.has_edge(person.name, child):
-                graph.add_edge(child, person.name)
-                print(child, person.name, "child, name\n")
+        if person.father is not None:
+            graph.add_edge(person, find_name(population, person.father))
+        if person.mother is not None:
+            graph.add_edge(person, find_name(population, person.mother))
     return graph
 
 def inbreed_calculate(child):
@@ -93,5 +92,3 @@ def draw_graph():
         pos=graphviz_layout(reversed_graph, prog='dot')
         nx.draw(reversed_graph, pos, with_labels=True, arrows=True, node_color="steelblue", alpha=0.6, node_size=100)
         plt.show()
-
-
