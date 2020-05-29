@@ -4,7 +4,7 @@ import os.path
 import tkinter.filedialog
 from algorithms.data import load_from_xls
 from algorithms.graph import inbreed_calculate, relation_calculate, generate_data, draw_graph
-textMain = "\n• First, load the pedigree file in .xlsx or .xls format.\n• To calculate the coefficient of inbreeding, select one person on the list.\n• To calculate the coefficient of relationship, select two person on the list.\n• Finally click the appropriate inbred_button.\n• After choosing data, it is possible to draw a family tree.\n\n"
+textMain = "\n• First, load the pedigree file in .xlsx or .xls format. You can check how your file should look like by clicking in the question mark.\n• You can also check how this calculator works using sample data by clicking 'Load sample data'.\n• To calculate the coefficient of inbreeding, select one person on the list.\n• To calculate the coefficient of relationship, select two person on the list.\n• Finally click the appropriate inbred_button.\n• After choosing data, it is possible to draw a family tree.\n\n"
 subjects = []
 
 
@@ -70,7 +70,7 @@ def create_hint_window():
     hint_window = Toplevel()
     canvas2 = Canvas(hint_window, width=618, height=406)
     img = PhotoImage(file=parse_path("example.png"))
-    infoTxt="Your .xlsx file should look like this:"
+    infoTxt="Your .xlsx / .xls file should look like this:"
     info = Message(hint_window, text=infoTxt, anchor=W, width=400, font=("Helvetica", 16))
     
     infoTxt2="Name, birth year and death year are required. Names should be unique, and for the same person occuring in column mother or father names should be exactly the same (only trailing and leading spaces are deleted, names are case sensitive)."
