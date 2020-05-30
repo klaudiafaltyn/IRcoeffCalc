@@ -8,12 +8,14 @@ textMain = "\n• First, load the pedigree file in .xlsx or .xls format. You can
 subjects = []
 
 
-def parse_path(name):
-    if hasattr(sys, "_MEIPASS"):
-        file_path = os.path.join(sys._MEIPASS, name)
-    else:
-        file_path = name
-    return file_path
+def parse_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 def open_file(window, listbox, txt_field):
     listbox.delete("0", "end")
@@ -69,7 +71,7 @@ def show_relation(txt_field, idx):
 def create_hint_window():
     hint_window = Toplevel()
     canvas2 = Canvas(hint_window, width=618, height=406)
-    img = PhotoImage(file=parse_path("example.png"))
+    img = PhotoImage(file=parse_path("assets/example.png"))
     infoTxt="Your .xlsx / .xls file should look like this:"
     info = Message(hint_window, text=infoTxt, anchor=W, width=400, font=("Helvetica", 16))
     
@@ -92,7 +94,7 @@ def open_sample_data(window, listbox, txt_field):
     listbox.delete("0", "end")
     subjects[:] = []
     try:
-        load_from_xls(subjects, parse_path("sample_data.xlsx"))
+        load_from_xls(subjects, parse_path("assets/sample_data.xlsx"))
         txt_field.configure(foreground="black", text="")    
     except Exception as e:
         txt_field.configure(foreground="red", text="Error while opening file! Please try again.")    
@@ -108,7 +110,7 @@ def create_window():
 
     canvas = Canvas(window, width=500, height=80)
     canvas.pack()
-    img = PhotoImage(file=parse_path("logo.png"))
+    img = PhotoImage(file=parse_path("assets/logo.png"))
     canvas.create_image(20,20, anchor=NW, image=img)
     
     scrollbar = Scrollbar(window)
@@ -146,7 +148,7 @@ def create_window():
     load_button = Button(
         frame, text="Load file", width=16, command=lambda: open_file(window, listbox, resultInbred)
     )
-    question_mark = PhotoImage(file=parse_path("question.png")).subsample(5, 5)
+    question_mark = PhotoImage(file=parse_path("assets/question.png")).subsample(5, 5)
     question_icon = Button(frame, image = question_mark, command=lambda: create_hint_window())
 
     sample_data_button = Button(
