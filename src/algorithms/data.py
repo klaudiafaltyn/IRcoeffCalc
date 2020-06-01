@@ -1,5 +1,6 @@
 from xlrd import open_workbook
 
+
 class Person(object):
     def __init__(self, name, born_year, death_year, mother, father):
         self.name = name.strip() if name is not None else None
@@ -9,7 +10,7 @@ class Person(object):
         self.father = father.strip() if father is not None else None
 
     def __repr__(self):
-        return ("%s\n%s-%s" % (self.name, self.born_year, self.death_year))
+        return "%s\n%s-%s" % (self.name, self.born_year, self.death_year)
 
 
 def load_from_xls(people, src):
@@ -22,7 +23,7 @@ def load_from_xls(people, src):
         for row in range(1, number_of_rows):
             values = []
             for col in range(number_of_columns):
-                value  = (sheet.cell(row,col).value)
+                value = sheet.cell(row, col).value
                 if len(str(value)) < 2:
                     values.append(None)
                 else:
