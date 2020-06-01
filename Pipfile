@@ -10,8 +10,10 @@ networkx = "*"
 matplotlib = "*"
 scipy = "*"
 pygraphviz = "*"
-pyinstaller = "*"
-black = "*"
+PyInstaller = "*"
+pydot = "*"
+pydot-ng = "*"
+graphviz = "*"
 
 [dev-packages]
 

@@ -1,7 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from math import sqrt
-from networkx.drawing.nx_agraph import graphviz_layout
 
 population = []
 graph_wrapper = []
@@ -108,7 +107,7 @@ def generate_data(data):
 def draw_graph():
     if len(graph_wrapper) == 1:
         reversed_graph = nx.reverse(graph_wrapper[0], copy=True)
-        pos = graphviz_layout(reversed_graph, prog="dot")
+        pos = nx.nx_pydot.graphviz_layout(reversed_graph, prog="dot")
         nx.draw(
             reversed_graph,
             pos,

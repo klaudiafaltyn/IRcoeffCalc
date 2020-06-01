@@ -10,7 +10,7 @@ from algorithms.graph import (
     draw_graph,
 )
 
-textMain = "\n• First, load the pedigree file in .xlsx or .xls format. You can check how your file should look like by clicking in the question mark.\n• You can also check how this calculator works using sample data by clicking 'Load sample data'.\n• To calculate the coefficient of inbreeding, select one person on the list.\n• To calculate the coefficient of relationship, select two person on the list.\n• Finally click the appropriate inbred_button.\n• After choosing data, it is possible to draw a family tree.\n\n"
+textMain = "\n• First, load the pedigree file in .xlsx or .xls format. You can check how your file should look like by clicking in the question mark.\n• You can also check how this calculator works using sample data by clicking 'Load sample data'.\n• To calculate the coefficient of inbreeding, select one person on the list.\n• To calculate the coefficient of relationship, select two people on the list.\n• Finally click the appropriate button.\n• After choosing data, it is possible to draw a family tree.\n\n"
 subjects = []
 
 
