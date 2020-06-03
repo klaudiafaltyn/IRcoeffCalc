@@ -1,3 +1,4 @@
+import os
 import networkx as nx
 import matplotlib.pyplot as plt
 from math import sqrt
@@ -107,7 +108,10 @@ def generate_data(data):
 def draw_graph():
     if len(graph_wrapper) == 1:
         reversed_graph = nx.reverse(graph_wrapper[0], copy=True)
-        pos = nx.nx_pydot.graphviz_layout(reversed_graph, prog="dot")
+        if os.name == "nt":
+            pos = nx.circular_layout(reversed_graph, prog="dot")
+        else:
+            pos = nx.nx_pydot.graphviz_layout(reversed_graph, prog="dot")
         nx.draw(
             reversed_graph,
             pos,
